@@ -18,10 +18,12 @@
             <div class="row">
                 <div class="col-md-12 text-center">
                     {% if not member_id %}
-                        <br>
-                        *** อัพโหลด "รูปแนวตั้ง" เท่านั้น รูปตัวอย่างที่ generate แล้วจะได้ตามนี้จ้า ***
-                        <br>
-                        *** หากมี id แล้ว อยากแก้ไขรูป ให้เข้าไปที่ (เช่น id=1) <a href="http://{{ root_url }}/members/1/">http://{{ root_url }}/members/1/</a>  ***
+                        <div class="row">
+                            <div class="col-md-12">
+                                <font color="red" size=5>หาก กรอกสำเร็จ มี id แล้ว อยากแก้ไขรูปได้ เช่น พี่ชวิน id=1 ก็จะแก้ไขรูปที่ <a href="http://{{ root_url }}/members/1/">http://{{ root_url }}/members/1/</a><br>(อย่ากดไปแก้รูปชาวบ้านนะจ้ะ)</font>
+                                
+                            </div>
+                        </div>
                         <br>
                         <img src="/members/?id=1">
                     {% else %}
@@ -40,6 +42,12 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
+                    <div class="col-md-12">
+                        <font color="blue" size=3>รบกวนอ่านคำแนะนำการกรอกข้อมูลสีฟ้านะคะ</font>
+                    </div>
+                </div>
+                
+                <div class="row">
                     <div class="col-md-6">
                         <label>*ชื่อเล่น:</label>
                     </div>
@@ -48,10 +56,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <font size=1>ใส่คำว่าพี หรือน้อง หรือหมู หน้าชื่อม้าน้อยเองเลยจ้า</font>
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">พี่ชวิน น้องชวิน หนุ่มชวิน</font>
                     </div>
                 </div>
+                <hr>
+
                 <div class="row">
                     <div class="col-md-6">
                         <label>*ชื่อจริง:</label>
@@ -62,12 +75,32 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">ชวิน</font>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-6">
                         <label>*นามสกุล:</label>
                     </div>
                     <div class="col-md-6">
                         {{ form.lastname }}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">ภัทรมาลัย</font>
+                    </div>
+                </div>
+                <hr>
+
                 <div class="row">
                     <div class="col-md-6">
                         <label>*เพศ:</label>
@@ -78,12 +111,24 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">ชาย</font>
+                    </div>
+                </div>
+                <hr>
+
+                <div class="row">
+                    <div class="col-md-6">
                         <label>*วันเกิดม้าน้อย:</label>
                     </div>
                     <div class="col-md-6">
                         {{ form.birthdate }}
                     </div>
                 </div>
+                <hr>
+
                 <div class="row">
                     <div class="col-md-6">
                         <label>ลูกพ่อ:</label>
@@ -93,10 +138,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <font size=1>ไม่ต้องใส่คำว่าพ่อข้างหน้าเองนะ ระบบใส่ให้เอง</font>
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">จั๊วะ (ไม่ต้องใส่คำว่าพ่อ)</font>
                     </div>
                 </div>
+                <hr>
+
                 <div class="row">
                     <div class="col-md-6">
                         <label>*ลูกแม่:</label>
@@ -106,10 +156,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <font size=1>ไม่ต้องใส่คำว่าแม่ข้างหน้าเองนะ ระบบใส่ให้เอง</font>
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">เก๋ (ไม่ต้องใส่คำว่าแม่)</font>
                     </div>
                 </div>
+                <hr>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <label>*Facebook:</label>
@@ -119,10 +174,15 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <font size=1>ตัวอย่าง https://www.facebook.com/nattanicha</font>
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">http://www.facebook.com/nattanicha</font>
                     </div>
                 </div>
+                <hr>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <label>*ที่อยู่:</label>
@@ -133,12 +193,32 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <label>*จังหวัด:</label>
+                       <font size="1px" color="blue">ที่อยู่จริง: </font>
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">11/1 แขวงบางหว้า เขตภาษีเจริญ กรุงเทพ 10110 </font>
+                    </div>
+                </div>
+                <hr>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>*สาขา:</label>
                     </div>
                     <div class="col-md-6">
                         {{ form.province }}
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        
+                    </div>
+                    <div class="col-md-6">
+                        <font size="1px" color="blue">กรุงเทพ</font>
+                    </div>
+                </div>
+                <hr>
+                
                 <div class="row">
                     <div class="col-md-6">
                         <label>*อัพโหลดรูปแนวตั้ง: </label>
@@ -148,8 +228,17 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-md-3">
+                        
+                    </div>
+                    <div class="col-md-9">
+                        <font color="blue">แนวตั้งเท่านั้น / ไม่เกิน 1.5 mb </font>
+                    </div>
+                </div>
+                <hr>    
+                <div class="row">
                     <div class="col-md-12">
-                        **เฉพาะรูปแนวตั้งเท่านั้น และแม่ๆ ต้องปรับขนาดรูป ให้พอดีกรอบจากโปรแกรมอื่นจ้า**
+                        <font color="red" size=3>ถ้ากด Add แล้วเจอหน้า error ให้อ่านว่าเกิดจากอะไร แล้วกด back กลับมาแก้ไขค่ะ <u>แต่ข้อมูลแก้ไขไม่ได้แล้วนะคะ ต้องติดต่อ admin เท่านั้น </u>ดังนั้นรบกวนตรวจสอบให้ดี ถ้าไม่แน่ใจว่าตัวเองกรอกสำเร็จหรือไม่ ให้ดูลิสต์รายชื่อม้าน้อยด้านล่างนี้ ถ้ามีแล้วแปลว่ากรอกสำเร็จค่ะ *จะกรอกซ้ำอีกไม่ได้ค่ะ*</font>
                     </div>
                 </div>
                 <div class="row">
@@ -158,9 +247,9 @@
                     </div>
                 </div>
             </form>
-            <h5>หากสมัครสมาชิกแล้ว เปลี่ยนรูปได้ด้วยตัวเอง ที่ /members/idของม้าน้อย</h5>
+            
             <div class="row">
-                <b>รายชื่อม้าน้อย</b>
+                <h2>รายชื่อม้าน้อย</h2  >
                 <div class="col-md-12">
                     {% for member in members %}
                         <a href="http://{{ root_url }}/members/{{ member.id }}/"> id: {{ member.id }} - {{ member.nickname }} ลูกพ่อ{{ member.dad_name}} แม่{{ member.mom_name}}</a> <br>

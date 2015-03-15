@@ -28,16 +28,22 @@
             <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
                 <div class="row">
-                    <div class="col-md-9">
-                        <label>อัพโหลด "รูปแนวตั้ง" เท่านั้น</label>
+                    <div class="col-md-12">
+                        <font color="blue" size=3>แนวตั้งเท่านั้น / ไม่เกิน 1.5 mb </font>
                     </div>
                 </div>
+                <br>   
                 <div class="row">
                     <div class="col-md-12">
                         <input id="id_image" type="file" class="" name="image">
                     </div>
                 </div>
-                <br/>
+                <hr/>
+                <div class="row">
+                    <div class="col-md-12">
+                        <font color="red" size=3>ถ้ากด submit แล้วเจอหน้า error ให้อ่านว่าเกิดจากอะไร แล้วกด back กลับมาแก้ไขค่ะ </font>
+                    </div>
+                </div>
                 <div class="row">
                     <div class="col-md-12">
                         <button name="submit" class="btn btn-success pull-lef" type="submit">อัพโหลดใหม่</button>
@@ -45,6 +51,13 @@
                     </div>
                 </div>
             </form>
+            <br><br><br>
+            <div class="row">
+                    <div class="col-md-12">
+                        <font color="red" size=3>ถ้าเจอ error <br>
+                        [u’File size must be under 1.5 MB. Current file size is 2.5\xa0MB.’] — แปลว่า ไฟล์รูปมีขนาดเกิน 1.5 MB ไม่สามารถอัพโหลดได้</font>
+                    </div>
+                </div>
         </div>
     </div>
 </div>
