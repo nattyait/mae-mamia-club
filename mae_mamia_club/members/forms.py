@@ -34,7 +34,7 @@ class RestrictedImageField(forms.ImageField):
 
 class MemberForm(forms.ModelForm):
     birthdate = forms.DateField(widget = SelectDateWidget(years=(2013, 2014)))
-    image = RestrictedImageField(max_upload_size=1048576)
+    image = RestrictedImageField(max_upload_size=1572864)
     gender = forms.ChoiceField(
         label='Gender',
         choices=(('','-----------'),('g', 'girl'),('b', 'boy') ),
@@ -46,7 +46,7 @@ class MemberForm(forms.ModelForm):
 
 class MemberGenerateImageForm(forms.Form):
 
-    image = RestrictedImageField(max_upload_size=1048576)
+    image = RestrictedImageField(max_upload_size=1572864)
 
     def save(self):
         data = self.cleaned_data

@@ -215,7 +215,7 @@ class MemberGenerateImage(TemplateView):
             obj.save()
         else:
             if forms.ValidationError: 
-                raise forms.ValidationError(_('File size must be under 1 MB. Current file size is %s.') % (filesizeformat(request.FILES['image'].size)))
+                raise forms.ValidationError(_('File size must be under 1.5 MB. Current file size is %s.') % (filesizeformat(request.FILES['image'].size)))
 
         return render(
             request,

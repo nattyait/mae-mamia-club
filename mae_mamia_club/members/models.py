@@ -8,7 +8,7 @@ def content_file_name(instance, filename):
 class Member(models.Model):
     def validate_image(fieldfile_obj):
         filesize = fieldfile_obj.file.size
-        megabyte_limit = 1.0
+        megabyte_limit = 1.5
         if filesize > megabyte_limit*1024*1024:
             raise ValidationError("Max file size is %sMB" % str(megabyte_limit))
 
