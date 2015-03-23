@@ -17,56 +17,8 @@ from mappings.models import Word
 import StringIO
 from django.core.files.uploadedfile import InMemoryUploadedFile
 
-
-class MemberAddView(TemplateView):
-    form_class = MemberForm
-    template = 'member_add.html'
-
-    def get(self, request):
-        form = self.form_class()
-
-        return render(
-            request,
-            self.template,
-            {
-                'form': form,
-                'root_url': request.get_host(),
-                'members': Member.objects.all()
-            }
-        )
-
-    def post(self, request):
-        form = self.form_class(request.POST, request.FILES)
-        member_id = 1
-        if form.is_valid(): 
-            member = form.save()
-            member_id = member.id
-            obj = Member.objects.get(id=member_id)
-            obj.image.save('kid_images/'+str(member_id)+'.png', obj.image, save=True)
-        else:
-            raise forms.ValidationError('Please input required data, correct image size or this data is already existed')
-
-        return render(
-            request,
-            self.template,
-            {
-                'form': self.form_class(),
-                'member_id': member_id,
-                'root_url': request.get_host(),
-                'members': Member.objects.all()
-            }
-        )
-
-
-class MemberView(TemplateView):
-
-    def get(self, request):
-        member_id = request.GET.get('id')
-
-        try:
-            member = Member.objects.get(id=member_id)
-        except ObjectDoesNotExist:
-            raise Http404
+class IDCardGenerating:
+    def generate_idcard(self, member):
 
         if member.gender == 'g':
             foreground = Image.open('girl.png')
@@ -166,6 +118,66 @@ class MemberView(TemplateView):
         draw.text(text_pos, text, fill=white, font=font)
         del draw
 
+        return background
+
+
+class MemberAddView(TemplateView):
+    form_class = MemberForm
+    template = 'member_add.html'
+
+    def get(self, request):
+        form = self.form_class()
+
+        return render(
+            request,
+            self.template,
+            {
+                'form': form,
+                'root_url': request.get_host(),
+                'members': Member.objects.all()
+            }
+        )
+
+    def post(self, request):
+        form = self.form_class(request.POST, request.FILES)
+        member_id = 1
+        if form.is_valid(): 
+            member = form.save()
+            member_id = member.id
+            obj = Member.objects.get(id=member_id)
+            obj.image.save('kid_images/'+str(member_id)+'.png', obj.image, save=True)
+
+            #generate image
+            id_card = IDCardGenerating()
+            background = id_card.generate_idcard(obj)
+            background.save('id_cards/'+str(member_id)+'.png', 'PNG')
+        else:
+            raise forms.ValidationError('Please input required data, correct image size or this data is already existed')
+
+        return render(
+            request,
+            self.template,
+            {
+                'form': self.form_class(),
+                'member_id': member_id,
+                'root_url': request.get_host(),
+                'members': Member.objects.all()
+            }
+        )
+
+
+class MemberView(TemplateView):
+
+    def get(self, request):
+        member_id = request.GET.get('id')
+
+        try:
+            member = Member.objects.get(id=member_id)
+        except ObjectDoesNotExist:
+            raise Http404
+
+        background = Image.open('id_cards/'+str(member_id)+'.png')
+
         response = HttpResponse(content_type='image/png')
         # now, we tell the image to save as a PNG to the
         # provided file-like object
@@ -213,6 +225,11 @@ class MemberGenerateImage(TemplateView):
             obj = Member.objects.get(pk=member_id)
             obj.image = form.cleaned_data['image']
             obj.save()
+
+            #generate image
+            id_card = IDCardGenerating()
+            background = id_card.generate_idcard(obj)
+            background.save('id_cards/'+str(member_id)+'.png', 'PNG')
         else:
             if forms.ValidationError: 
                 raise forms.ValidationError(_('File size must be under 1.5 MB. Current file size is %s.') % (filesizeformat(request.FILES['image'].size)))
