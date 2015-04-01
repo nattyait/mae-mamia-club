@@ -25,9 +25,9 @@ from .models import Member
 class MemberAdmin(admin.ModelAdmin):
     #resource_class = MemberResource
     list_per_page = 30
-    list_display = ('nickname', 'firstname', 'lastname', 'birthdate', 'gender', 'province')
+    list_display = ('id','nickname', 'firstname', 'lastname', 'birthdate', 'gender', 'province')
     #list_display_links = ('first_name', 'last_name')
-    search_fields = ['nickname', 'firstname', 'lastname', 'birthdate', 'gender', 'province']
+    search_fields = ['id', 'nickname', 'firstname', 'lastname', 'mom_name', 'dad_name', 'birthdate', 'gender', 'province']
     list_filter = ('gender', )
 
 admin.site.register(Member, MemberAdmin)
